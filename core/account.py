@@ -522,7 +522,7 @@ class MultiAccountManager:
             manager.failure_count = global_stats["account_failures"].get(config.account_id, 0)
         self.accounts[config.account_id] = manager
         self.account_list.append(config.account_id)
-        logger.info(f"[MULTI] [ACCOUNT] 添加账户: {config.account_id}")
+        logger.debug(f"[MULTI] [ACCOUNT] 添加账户: {config.account_id}")
 
     async def get_account(
         self,
@@ -668,7 +668,7 @@ def load_multi_account_config(
         # 检查账户是否已过期（已过期也加载到管理面板）
         is_expired = config.is_expired()
         if is_expired:
-            logger.warning(f"[CONFIG] 账户 {config.account_id} 已过期，仍加载用于展示")
+            logger.debug(f"[CONFIG] 账户 {config.account_id} 已过期，仍加载用于展示")
 
         manager.add_account(config, http_client, user_agent, retry_policy, global_stats)
         if is_expired:
